@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { fetchFiles } from '../api/FilesApi.js';
+import { fetchFiles } from '../api/filesApi.js';
 
 
 export default function useFiles(page, limit, name_like, sort, order,pagination) {
