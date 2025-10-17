@@ -1,9 +1,14 @@
 import axios from 'axios';
+const baseUrl = import.meta.env.VITE_API_BASE_URL;
 
-const API = axios.create({baseURL: 'http://localhost:4000'});
+console.log("bas",baseUrl)
+const API = axios.create({
+    baseURL: baseUrl
+  });
 
 export const fetchFiles = async ({page = 1, limit = 5, name_like = '', sort = 'uploadedAt', order = 'desc', pagination = true}) => {
     const params = {_sort: sort, _order: order};
+    console.log("bas",baseUrl)
     console.log("apiurl", page, limit, name_like, sort, order, pagination)
     if (pagination) {
         params._page = page;
