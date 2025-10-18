@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {useNavigate} from "react-router-dom";
-import {Table, Input, Space, Pagination, Spin} from 'antd';
+import {Table, Input, Space, Pagination} from 'antd';
 import {PAGE_KEY, SELECTED_KEY} from "../../../constant/dataKey.jsx";
 import useFiles from "../../../hooks/useFiles.js";
 import FileUpload from "../common/FileUpload.jsx";
@@ -85,8 +85,6 @@ export default function Dashboard() {
                               onChange={(e) => onSearch(e.target.value)}/>
                 <FileUpload onUploaded={refetch}/>
             </Space>
-
-            <Spin spinning={isLoading}>
                 <Table
                     columns={columns}
                     loading={isLoading}
@@ -101,7 +99,6 @@ export default function Dashboard() {
                     <Pagination defaultPageSize={limit} onChange={handlePagination} pageSizeOptions={[5, 10, 15, 20]}
                                 showSizeChanger={true} defaultCurrent={data?.first} total={data?.items}/>
                 </div>
-            </Spin>
         </AppBase>
     );
 }
