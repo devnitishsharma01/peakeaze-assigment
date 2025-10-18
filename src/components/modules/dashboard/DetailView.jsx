@@ -1,5 +1,5 @@
 import React, {useEffect, useState,useRef} from 'react';
-import {List, Button, Row, Col, Card, Popconfirm, Typography, message, Pagination} from 'antd';
+import {List, Button, Row, Col, Card, Popconfirm, Typography, message, Empty} from 'antd';
 import filesApi from "../../../api/filesApi.js";
 import {SELECTED_KEY} from "../../../constant/dataKey.jsx";
 import AppBase from "../../base/AppBase.jsx";
@@ -117,7 +117,7 @@ export default function DetailView() {
                                 <img src={selectedFile.url} alt={selectedFile.name}
                                      style={{maxWidth: '100%', maxHeight: '100%'}}/>
                             )
-                        ) : <p>Select a file</p>}
+                        ) : <Empty/>}
                     </Card>
                 </Col>
             </Row>
