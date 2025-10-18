@@ -12,6 +12,9 @@ A simple React application for uploading, listing, and managing files using a mo
 git clone https://github.com/devnitishsharma01/peakeaze-assigment
 cd react-file-uploader
 
+add .env  file 
+VITE_API_BASE_URL=http://localhost:4000
+
 
 ## 2 Install Dependencies
 npm install
