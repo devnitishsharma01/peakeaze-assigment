@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState,useRef} from 'react';
 import {List, Button, Row, Col, Card, Popconfirm, Typography, message, Pagination} from 'antd';
 import filesApi from "../../../api/filesApi.js";
 import {SELECTED_KEY} from "../../../constant/dataKey.jsx";
@@ -11,10 +11,16 @@ export default function DetailView() {
     const [pagination] = useState(false);
 
     const {data, isLoading, refetch} = useFiles(null, null, pagination);
+    const itemRefs = useRef({});
 
 
     useEffect(() => {
         localStorage.setItem(SELECTED_KEY, selectedId);
+        const selectedEl = itemRefs.current[selectedId];
+        if (selectedEl && selectedEl.scrollIntoView) {
+            selectedEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
     }, [selectedId]);
 
     const handleDelete = async (id) => {
@@ -36,15 +42,7 @@ export default function DetailView() {
     const next = () => setSelectedId(data[Math.min(currentIndex + 1, data.length - 1)]?.id);
     const prev = () => setSelectedId(data[Math.max(currentIndex - 1, 0)]?.id);
     const selectedFile = data?.find(f => f.id === selectedId);
-    const itemRender = (_, type, originalElement) => {
-        if (type === 'prev') {
-            return <a>Previous</a>;
-        }
-        if (type === 'next') {
-            return <a>Next</a>;
-        }
-        return originalElement;
-    };
+ 
     return (<AppBase>
             <Row>
                 <Col span={6}>
@@ -63,12 +61,12 @@ export default function DetailView() {
                     >
                         <div style={{flex: 1, overflowY: 'auto', padding: 8}}>
 
-                            <List
+                            <List style={{paddingBottom:"90px"}}
                                 loading={isLoading}
                                 dataSource={data}
                                 renderItem={item => (
                                     <List.Item
-
+                                        ref={el => (itemRefs.current[item.id] = el)}
                                         style={{
                                             cursor: 'pointer',
                                             padding: '12px',
